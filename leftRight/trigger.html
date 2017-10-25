@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h1 class="zm1">上海族蚂1</h1>
+	<h1 class="zm2">上海族蚂2</h1>
+	<h1 class="zm3">上海族蚂3</h1>
+	<h1 class="zm4">上海族蚂4</h1>
+	<h1 class="zm5">上海族蚂5</h1>
+	<script src="./jquery.js"></script>
+	<script>
+		$(".zm2").on("click",function(color){
+			console.log($(this).text());
+			$(this).css("color",color);
+		});
+		var color = "red";
+		$(".zm2").trigger("click",function(color){
+			console.log(color);
+			
+		});
+	</script>
+</body>
+</html>

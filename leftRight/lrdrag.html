@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.drag{
+			width: 400px;
+			height: 300px;
+			background-color: gray;
+			position: relative;
+			margin:0 auto;
+		}
+		.resizeL,.resizeR{
+			top:50%;
+			height: 10px;
+			width: 10px;
+			margin-top: -5px;
+			background-color: #000;
+			position: absolute;
+		}
+		.resizeL{
+			left: -5px;
+			cursor: w-resize;
+		}
+		.resizeR{
+			right: -5px;					
+			cursor: w-resize;
+		}
+	</style>
+</head>
+<body>
+	<div class="drag">
+		<div class="resizeL"></div>
+		<div class="resizeR"></div>
+	</div>
+	<script>
+		var oDrag=document.querySelector('.drag');
+		var resizeL=document.querySelector('.resizeL');
+		var resizeR=document.querySelector('.resizeR');
+		var oldWidth = oDrag.offsetWidth;
+		var oldLeft = oDrag.offsetLeft;
+		console.log(oldWidth);
+		console.log(oDrag.offsetLeft);
+		// drag(oDrag);
+		        //拖拉函数
+        function drag(oDrag){
+            var disX=disY=0;
+            resizeR.onmousedown=function(e){
+                e=e||event;
+                e.preventDefault();
+                disX=e.clientX-resizeR.offsetLeft;
+                disY=e.clientY-resizeR.offsetTop;
+                document.onmousemove=function(e){
+                    e=e||event;
+                    var Left=e.clientX-disX;
+                    var Top=e.clientY-disY;
+                    // var maxleft=document.documentElement.offsetWidth-resizeR.offsetWidth;
+                    // var maxtop=document.documentElement.clientHeight-resizeR.offsetHeight;
+                    // var maxleft=document.documentElement.offsetWidth-oDrag.offsetWidth;
+                    // var maxtop=document.documentElement.clientHeight-oDrag.offsetHeight;
+                    // if (Left<0) {
+                    //     Left=0;
+                    // }else if (Left>maxleft) {
+                    //     Left=maxleft;
+                    // };
+                    // if (Top<0) {
+                    //     Top=0;
+                    // }else if (Top>maxtop) {
+                    //     Top=maxtop;
+                    // };
+                    if(oDrag.offsetWidth<20){
+                    	console.log(5654);
+                    	oDrag.style.width= "20px";
+                    	document.onmousemove=null;
+                    }else{
+                    	oDrag.style.width = Left+'px';
+                    	resizeR.style.left = Left-5+'px';
+                    }
+                };
+                document.onmouseup=function(){
+                    document.onmousemove=null;
+                    document.onmouseup=null;
+                };
+            };
+        }            
+        // //改变大小函数
+        // function resize(oparent,handle,isleft,){
+        //     var disX=disY=0;
+        //     handle=handle||oDrag;
+        //     handle.onmousedown=function(e){
+        //         e=e||event;
+        //         e.preventDefault();
+        //         disX=e.clientX-this.offsetLeft;
+        //         var iparentleft=oparent.offsetLeft;
+        //         var iparentwidth=oparent.offsetWidth;
+
+        //         document.onmousemove=function(e){
+        //             e=e||event;
+        //             var iL=e.clientX-disX;
+        //             var iT=e.clientY-disY;
+        //             var maxw=document.documentElement.clientWidth-oparent.offsetLeft-2;
+        //             var maxh=document.documentElement.clientHeight-oparent.offsetTop-2;
+        //             var iw= isleft?iparentwidth-iL:handle.offsetWidth+iL;
+        //             if (isleft) {
+        //                 oparent.style.left=iparentleft+iL+'px';
+        //             };
+        //             if (isleft) {
+        //                 document.onmousemove=null;
+        //             };
+        //             return false;
+        //         };
+        //         document.onmouseup=function(){
+        //             document.onmousemove=null;
+        //             document.onmouseup=null;
+        //         };
+        //     };
+        // };
+ 		drag(oDrag);
+ 		// resize(oDrag,resizeR,false);
+	</script>
+</body>
+</html>
